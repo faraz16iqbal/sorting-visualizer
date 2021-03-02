@@ -15,7 +15,7 @@ const Navbar = () => {
 
           <div className="group length">
             <label>Length</label>
-            <input type="range" min="5" max={100} step="1" value="1"></input>
+            <input type="range" min="5" max={100} step="1"></input>
           </div>
 
           <select>
