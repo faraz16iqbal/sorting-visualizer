@@ -3,7 +3,7 @@ import "./App.css";
 import { useEffect, useState } from "react";
 
 const App = () => {
-  const generateRandomArray = (len) => {
+  const generateArray = (len) => {
     setCompleted(false);
     setSorting(false);
     setSortedIndex([]);
@@ -24,13 +24,8 @@ const App = () => {
     //   console.log(randomArray[i]);
     // }
   };
-
-  useEffect(() => {
-    generateRandomArray(10);
-  }, []);
-
   const [algo, setAlgo] = useState("bubbleSort");
-  const [len, setLength] = useState(30);
+  const [len, setLength] = useState(20);
   const [blocks, setBlocks] = useState([]);
   const [sorting, setSorting] = useState(false);
   const [completed, setCompleted] = useState(true);
@@ -38,9 +33,42 @@ const App = () => {
   const [compare, setCompare] = useState([]);
   const [swap, setSwap] = useState([]);
   const [sortedIndex, setSortedIndex] = useState([]);
+
+  useEffect(() => {
+    generateArray(len);
+  }, [len, algo]);
+
+  const handleAlgo = (event) => {
+    setAlgo(event.target.value);
+  };
+
+  const handleLength = (event) => {
+    setLength(Number(event.target.value));
+  };
+
+  const handleSpeed = (event) => {
+    setSpeed(Math.ceil(400 / Number(event.target.value)));
+  };
+  const handleSort = () => {};
+
+  useEffect(() => {
+    generateArray(len);
+  }, [len, algo]);
+
   return (
     <div className="App">
-      <Navbar />
+      <Navbar
+        generateRandomArray={() => generateArray(len)}
+        handleLength={handleLength}
+        handleSpeed={handleSpeed}
+        handleAlgo={handleAlgo}
+        handleSort={handleSort}
+        sorting={sorting}
+        completed={completed}
+        len={len}
+        speed={speed}
+        algo={algo}
+      />
     </div>
   );
 };
